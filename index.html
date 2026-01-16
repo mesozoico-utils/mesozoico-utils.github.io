@@ -1,54 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tool Hub</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Mesozoico Tool Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --card-bg: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2937;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    h1 { font-size: 1.6rem; font-weight: 650; }
+    .subtitle { color: var(--text-muted); margin-top: 4px; }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #16a34a 55%, #166534 100%);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .tools { display: flex; flex-direction: column; gap: 12px; }
+
+    .tool-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    .tool-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .tool-title { font-size: 1rem; font-weight: 600; }
+    .tool-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .tool-desc { color: var(--text-muted); font-size: 0.85rem; }
+
+    .tool-link {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Mesozoico Tool Hub</h1>
-    <p>Select a tool to launch</p>
+
+<main class="page">
+
+  <header class="header">
+    <div>
+      <div class="eyebrow">Tool Hub</div>
+      <h1>Mesozoico Tool Hub</h1>
+      <p class="subtitle">Select a tool to launch</p>
+    </div>
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      <span>Online utilities</span>
+    </div>
   </header>
 
-  <main class="cards">
+  <section class="tools">
 
-    <!-- Miragaia Calculator -->
-    <a class="card" href="tools/mirataildmg.html" target="_blank">
-      <div class="card-image" style="background-image: url('img/miragaia.jpg');"></div>
-      <div class="card-body">
-        <h2>Miragaia Tail Damage Calculator</h2>
-        <p>Simple Miragaia tail damage calculator that works by inputting the m1 damage. made by Pkionn</p>
+    <!-- Miragaia -->
+    <article class="tool-card">
+      <div class="tool-top">
+        <h2 class="tool-title">Miragaia Tail Damage Calculator</h2>
+        <span class="tool-tag">Calculator</span>
       </div>
-    </a>
-    <a class="card" href="tools/siamooldminigame.html" target="_blank">
-      <div class="card-image" style="background-image: url('img/siamoold.jpg');"></div>
-      <div class="card-body">
-        <h2>Old Siamotyrannus Minigame Trainer</h2>
-        <p>First version of the Siamotyrannus Choke minigame trainer made by RenCup</p>
-      </div>
-    </a>
-    <!-- Siamotyrannus Trainer -->
-    <a class="card" href="tools/siamominigame.html" target="_blank">
-      <div class="card-image" style="background-image: url('img/siamo.jpg');"></div>
-      <div class="card-body">
-        <h2>Siamotyrannus Minigame Trainer</h2>
-        <p>Improve on the Siamotyrannus's choke minigame.</p>
-      </div>
-    </a>
-    <a class="card" href="tools/miraoldcalc.html" target="_blank">
-      <div class="card-image" style="background-image: url('img/secondcalc.jpg');"></div>
-      <div class="card-body">
-        <h2>Old Miragaia tail damage calculator</h2>
-        <p>Old variant of miragaia damage calculator. made by RenCup.</p>
-      </div>
-    </a>
-  </main>
+      <p class="tool-desc">Calculate tail damage from M1 input.</p>
+      <a class="tool-link" href="tools/mirataildmg.html">
+        <span>➜</span> Open tool
+      </a>
+    </article>
 
-  <footer>
-    <p>Made with love by RenCup. Utilites got from various sources</p>
+    <!-- Siamo -->
+    <article class="tool-card">
+      <div class="tool-top">
+        <h2 class="tool-title">Siamotyrannus Minigame Trainer</h2>
+        <span class="tool-tag">Trainer</span>
+      </div>
+      <p class="tool-desc">Practice the choke timing minigame.</p>
+      <a class="tool-link" href="tools/siamominigame.html">
+        <span>➜</span> Open tool
+      </a>
+    </article>
+
+    <!-- Cerato Leg Calculator -->
+    <article class="tool-card">
+      <div class="tool-top">
+        <h2 class="tool-title">Cerato Leg Calculator</h2>
+        <span class="tool-tag">Calculator</span>
+      </div>
+      <p class="tool-desc">Multiply your input by 1.6.</p>
+      <a class="tool-link" href="tools/ceratoleg.html">
+        <span>➜</span> Open tool
+      </a>
+    </article>
+
+  </section>
+
+  <footer class="footer">
+    <span>Made with love by <strong>RenCup</strong>.</span>
+    <span>Utilities from various sources.</span>
   </footer>
 
-  <script src="script.js"></script>
+</main>
+
 </body>
 </html>
