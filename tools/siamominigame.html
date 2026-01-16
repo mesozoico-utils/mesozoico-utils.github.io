@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Siamotirannous Mesozoico Trainer</title>
+<style>
+    body {
+        background: #1e1e1e;
+        color: #e0e0e0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    h1 {
+        font-weight: 300;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    #config {
+        margin-bottom: 20px;
+    }
+
+    .configRow {
+        margin: 10px 0;
+    }
+
+    label {
+        display: inline-block;
+        width: 200px;
+        text-align: right;
+        margin-right: 10px;
+        font-size: 16px;
+        color: #ccc;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: none;
+        background: #2c2c2c;
+        color: #fff;
+        width: 160px;
+        text-align: center;
+    }
+
+    #startBtn {
+        padding: 12px 25px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+        background: #4a8cff;
+        color: white;
+        margin-top: 15px;
+        transition: background 0.2s;
+    }
+
+    #startBtn:hover {
+        background: #3a74d6;
+    }
+
+    #letterBox {
+        width: 180px;
+        height: 180px;
+        margin: 40px auto;
+        background: #333;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.15s;
+    }
+
+    #letter {
+        font-size: 120px;
+        font-weight: 600;
+    }
+
+    #results {
+        margin-top: 30px;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Siamotirannous Mesozoico – WASD Trainer</h1>
+
+<div id="config">
+
+    <div class="configRow">
+        <label for="duration">Session duration (seconds):</label>
+        <input id="duration" type="number" value="30" min="1">
+    </div>
+
+    <div class="configRow">
+        <label for="maxErrors">Max errors allowed (0 = unlimited):</label>
+        <input id="maxErrors" type="number" value="0" min="0">
+    </div>
+
+    <div class="configRow">
+        <label for="keyTime">Seconds allowed per key (0 = disabled):</label>
+        <input id="keyTime" type="number" value="0" min="0" step="0.1">
+    </div>
+
+</div>
+
+<button id="startBtn">Start</button>
+
+<div id="letterBox">
+    <div id="letter">?</div>
+</div>
+
+<div id="results"></div>
+
+<script>
+    const letters = ["W", "A", "S", "D"];
+    let current = "";
+    let lastLetter = "";
+    let hits = 0;
+    let misses = 0;
+    let running = false;
+    let timeLeft = 0;
+    let keyTimer = null;
+    let reactionTimes = [];
+    let lastKeyTime = 0;
+
+    const letterDiv = document.getElementById("letter");
+    const letterBox = document.getElementById("letterBox");
+    const resultsDiv = document.getElementById("results");
+    const startBtn = document.getElementById("startBtn");
+
+    function flash(color) {
+        letterBox.style.background = color;
+        setTimeout(() => {
+            letterBox.style.background = "#333";
+        }, 150);
+    }
+
+    function newLetter() {
+        let next;
+        do {
+            next = letters[Math.floor(Math.random() * letters.length)];
+        } while (next === lastLetter);
+
+        lastLetter = next;
+        current = next;
+        letterDiv.textContent = current;
+        lastKeyTime = performance.now();
+
+        const keyLimit = parseFloat(document.getElementById("keyTime").value);
+        if (keyLimit > 0) {
+            clearTimeout(keyTimer);
+            keyTimer = setTimeout(() => {
+                misses++;
+                flash("#e74c3c");
+                newLetter();
+                checkEnd();
+            }, keyLimit * 1000);
+        }
+    }
+
+    function startGame() {
+        hits = 0;
+        misses = 0;
+        reactionTimes = [];
+        running = true;
+        resultsDiv.textContent = "";
+
+        const duration = parseInt(document.getElementById("duration").value);
+        timeLeft = duration;
+
+        newLetter();
+
+        const timer = setInterval(() => {
+            timeLeft--;
+            if (timeLeft <= 0 || !running) {
+                clearInterval(timer);
+                endGame();
+            }
+        }, 1000);
+    }
+
+    function endGame() {
+        running = false;
+        clearTimeout(keyTimer);
+        letterDiv.textContent = "END";
+
+        const avg =
+            reactionTimes.length > 0
+                ? (reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length).toFixed(2)
+                : 0;
+
+        resultsDiv.innerHTML = `
+            <p>Hits: ${hits}</p>
+            <p>Misses: ${misses}</p>
+            <p>Accuracy: ${Math.round((hits / (hits + misses)) * 100) || 0}%</p>
+            <p>Average reaction time: ${avg} ms</p>
+        `;
+    }
+
+    function checkEnd() {
+        const maxErrors = parseInt(document.getElementById("maxErrors").value);
+        if (maxErrors > 0 && misses >= maxErrors) {
+            endGame();
+        }
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (!running) return;
+
+        const key = e.key.toUpperCase();
+        if (letters.includes(key)) {
+            if (key === current) {
+                hits++;
+                const now = performance.now();
+                reactionTimes.push(now - lastKeyTime);
+                flash("#2ecc71");
+            } else {
+                misses++;
+                flash("#e74c3c");
+            }
+            newLetter();
+            checkEnd();
+        }
+    });
+
+    startBtn.addEventListener("click", startGame);
+</script>
+
+</body>
+</html>
