@@ -11,73 +11,63 @@
       background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
       color: #e5e7eb;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       padding: 40px 16px;
       min-height: 100vh;
     }
 
-    .container {
-      max-width: 720px;
-      width: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      border-radius: 24px;
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-      padding: 32px;
-    }
-
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
       margin-bottom: 6px;
+      text-align: center;
     }
 
     .subtitle {
       font-size: 1rem;
       color: #9ca3af;
-      margin-bottom: 28px;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
-    .tool {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .cube {
       background: rgba(255,255,255,0.05);
       border: 1px solid #1f2937;
       border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 0 0 rgba(56,189,248,0);
     }
 
-    .tool h2 {
+    .cube:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 20px rgba(56,189,248,0.3);
+    }
+
+    .cube h2 {
       font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    .tool p {
-      font-size: 0.9rem;
-      color: #9ca3af;
-      margin-bottom: 10px;
-    }
-
-    .tool a {
-      display: inline-block;
-      padding: 8px 12px;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 10px;
-      text-decoration: none;
+    .cube p {
       font-size: 0.85rem;
-      transition: background 0.2s ease;
-    }
-
-    .tool a:hover {
-      background: rgba(56, 189, 248, 0.25);
+      color: #9ca3af;
     }
 
     .footer {
-      margin-top: 30px;
+      margin-top: 40px;
       font-size: 0.8rem;
       color: #9ca3af;
       text-align: center;
@@ -89,31 +79,32 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>MESOZOICO TOOL HUB</h1>
-    <div class="subtitle">Select a tool to launch</div>
 
-    <div class="tool">
+  <h1>MESOZOICO TOOL HUB</h1>
+  <div class="subtitle">Select a tool to launch</div>
+
+  <div class="grid">
+
+    <div class="cube" onclick="location.href='tools/mirataildmg.html'">
       <h2>Miragaia Tail Damage Calculator</h2>
       <p>Simple Miragaia tail damage calculator, works by inputting the m1 damage.</p>
-      <a href="tools/mirataildmg.html">Open tool</a>
     </div>
 
-    <div class="tool">
+    <div class="cube" onclick="location.href='tools/siamominigame.html'">
       <h2>Siamotyrannus Minigame Trainer</h2>
       <p>Improve on the Siamotyrannus's choke minigame.</p>
-      <a href="tools/siamominigame.html">Open tool</a>
     </div>
 
-    <div class="tool">
+    <div class="cube" onclick="location.href='tools/mirataildmg-old.html'">
       <h2>Old Miragaia Tail Calculator</h2>
       <p>Old variant of Miragaia damage calculator. Made by RenCup.</p>
-      <a href="tools/mirataildmg-old.html">Open tool</a>
     </div>
 
-    <div class="footer">
-      Made with love by <strong>RenCup</strong>. Utilities from various sources.
-    </div>
   </div>
+
+  <div class="footer">
+    Made with love by <strong>RenCup</strong>. Utilities from various sources.
+  </div>
+
 </body>
 </html>
