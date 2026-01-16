@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
       color: #e5e7eb;
       display: flex;
       flex-direction: column;
@@ -33,37 +33,43 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
       width: 100%;
-      max-width: 720px;
+      max-width: 900px;
     }
 
     .cube {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid #1f2937;
-      border-radius: 16px;
-      padding: 24px;
+      background: rgba(10, 15, 30, 0.75);
+      border: 1px solid #0f172a;
+      border-radius: 20px;
+      padding: 32px;
+      height: 200px;
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
       box-shadow: 0 0 0 rgba(56,189,248,0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .cube:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(56,189,248,0.3);
+      transform: translateY(-6px);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 0 25px rgba(56,189,248,0.35);
     }
 
     .cube h2 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .cube p {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #9ca3af;
+      line-height: 1.3rem;
     }
 
     .footer {
