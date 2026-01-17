@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mesozoico Legacy Tool Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #9ca3af;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .cube {
+      background: rgba(10, 15, 30, 0.75);
+      border: 1px solid #0f172a;
+      border-radius: 20px;
+      padding: 32px;
+      height: 200px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      box-shadow: 0 0 0 rgba(56,189,248,0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cube:hover {
+      transform: translateY(-6px);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 0 25px rgba(56,189,248,0.35);
+    }
+
+    .cube h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .cube p {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      line-height: 1.3rem;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .footer strong {
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MESOZOICO LEGACY TOOL HUB</h1>
+  <div class="subtitle">Select a tool to launch</div>
+
+  <div class="grid">
+
+    <div class="cube" onclick="location.href='tools/miraoldcalc.html'">
+      <h2>Miragaia Tail Damage Calculator</h2>
+      <p>Simple Miragaia tail damage calculator, works by inputting the M1 damage.</p>
+    </div>
+
+    <div class="cube" onclick="location.href='tools/siamooldminigame.html'">
+      <h2>Siamotyrannus Minigame Trainer</h2>
+      <p>Improve on the Siamotyrannus's choke minigame.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Made with love by <strong>RenCup and Pkionn</strong>. Utilities from various sources.
+  </div>
+
+</body>
+</html>
