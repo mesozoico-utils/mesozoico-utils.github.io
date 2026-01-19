@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dinosaur Damage Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --accent: #38bdf8;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --border-subtle: #1f2937;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 32px 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 720px;
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 24px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    padding: 28px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+  }
+
+  .tool-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-subtle);
+    border-radius: 18px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+  }
+
+  /* FIX: Dropdown text always black */
+  select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.9);
+    color: black !important;
+  }
+
+  select option {
+    color: black !important;
+    background: white;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #4e8cff;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  button:hover { background: #6ea0ff; }
+
+  .result {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+</style>
+</head>
+
+<body>
+
+<main class="page">
+  <h1>Mesozoico Special Move Damage Calculator</h1>
+  <p class="subtitle">Choose a calculator, enter your M1 damage, and get the result.</p>
+
+  <div class="tool-card">
+
+    <select id="calcSelect"></select>
+
+    <input id="value" type="number" placeholder="Enter your value">
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result">Result: —</div>
+  </div>
+</main>
+
+<script>
+/* ============================
+   CALCULATOR DEFINITIONS
+============================ */
+const calculators = [
+  {
+    id: "cerato",
+    name: "Cerato Leg Break Damage",
+    formula: x => x * 1.6
+  },
+  {
+    id: "miragaia",
+    name: "Miragaia Tail Damage",
+    formula: x => (275 / 50) * x
+  }
+];
+
+/* ============================
+   POPULATE DROPDOWN
+============================ */
+const select = document.getElementById("calcSelect");
+
+calculators.forEach(calc => {
+  const option = document.createElement("option");
+  option.value = calc.id;
+  option.textContent = calc.name;
+  select.appendChild(option);
+});
+
+/* ============================
+   CALCULATE
+============================ */
+function calculate() {
+  const selectedId = select.value;
+  const calc = calculators.find(c => c.id === selectedId);
+
+  const x = parseFloat(document.getElementById("value").value);
+  const resultBox = document.getElementById("result");
+
+  if (isNaN(x)) {
+    resultBox.textContent = "Result: Invalid number";
+    return;
+  }
+
+  const result = calc.formula(x);
+  resultBox.textContent = "Result: " + result.toFixed(2);
+}
+</script>
+
+</body>
+</html>
